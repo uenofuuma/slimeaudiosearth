@@ -29,7 +29,7 @@
   // 認識が成功した時
   recog.addEventListener("result", (ret) => {
     txt.innerHTML = ret.results[0][0].transcript;
-    window.open('https://www.google.com/search?q='+ret.results[0][0].transcript.split('OK スライム').join('')+'&safe=active&ssui=on')
+    window.open('https://www.google.com/search?q='+ret.results[0][0].transcript.split('OK スライム').join()+'&safe=active&ssui=on')
   });
  
   // 認識に失敗した時
