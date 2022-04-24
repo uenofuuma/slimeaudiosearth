@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="https://www.htmlcommentbox.com/storage/lg_15851750_screenshot-2022-03-23-184408.png">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>slime音声検索</title>
+</head>
+<body>
+  <b><div id='txt'>下のボタンを押して、「ok slime」と言い、<br>ブラウザで音声を許可してください。</div></b>
+  <button id="btn"type="submit"><img src="https://www.htmlcommentbox.com/storage/lg_15894508_.png" alt="マイク" /></button>
+  <script>
+  const recog = new webkitSpeechRecognition();  // 音声認識オブジェクト
+  const btn = document.getElementById("btn");
+  const txt = document.getElementById("txt");
+ 
+  // ボタンを押した時の処理
+  btn.addEventListener("click", () => {
+    recog.lang = "ja-JP";   // 認識する言語の設定
+    recog.start();          // 音声認識をスタート
+  });
+ 
+  // 認識開始した時
+  recog.addEventListener("soundstart", () => {
+    txt.innerHTML = "認識中...";
+  });
+ 
+  // 認識が成功した時
+  recog.addEventListener("result", (ret) => {
+    txt.innerHTML = ret.results[0][0].transcript;
+    window.open('https://www.google.com/search?q='+ret.results[0][0].transcript.split('OK スライム').join('')+'&safe=active&ssui=on')
+  });
+ 
+  // 認識に失敗した時
+  recog.addEventListener("nomatch", () => {
+    txt.innerHTML = "認識できませんでした";
+  });
+</script>
+  <style>
+    body{text-align:center;padding:100px;}
+    button{;background:none;border: none;}
+    div{font-size:40px;font-family:serif;}
+  </style>
+</body>
+</html>
